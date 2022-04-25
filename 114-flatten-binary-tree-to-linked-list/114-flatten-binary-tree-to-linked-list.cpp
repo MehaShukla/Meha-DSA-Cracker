@@ -12,8 +12,8 @@
 class Solution {
 public:
     // vector<int> pre;
-    TreeNode* finalRoot = NULL;
-    TreeNode* temp = NULL;
+    TreeNode* headnew = NULL;
+    TreeNode* tailnew = NULL;
     // void help(TreeNode* root)
     // {
     //     if(root==NULL)
@@ -33,15 +33,15 @@ public:
         TreeNode* n = new TreeNode(root->val);
         n->left = NULL;
         n->right = NULL;
-        if(finalRoot==NULL)
+        if(headnew==NULL)//1 hi elemnt h abhi tk mtlb to dono ko vhi point kro
         {
-            finalRoot=n;
-            temp = n;
+            headnew=n;
+            tailnew = n;
         }
         else
         {
-            temp->right = n;
-            temp = n;
+            tailnew->right = n;
+            tailnew = n;
         }
         helper(root->left);
         helper(root->right);
@@ -53,6 +53,6 @@ public:
         }
         // help(root);
         helper(root);
-        *root = *finalRoot;
+        *root = *headnew;
     }
 };
