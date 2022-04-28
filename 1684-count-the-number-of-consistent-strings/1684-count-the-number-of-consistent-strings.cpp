@@ -15,12 +15,13 @@ public:
           c=0;
             for(int j=0;j<words[i].length();j++)
                 {
-                    if(m.find(words[i][j])!=m.end())
+                    if(m.find(words[i][j])==m.end())
                     {
-                        c++;
+                        c=1;
+                        break;
                     }
                 }
-            if(c==words[i].length())
+            if(c==0)
             {   
                 count++;
             //cout<<words[i]<<'\n';
