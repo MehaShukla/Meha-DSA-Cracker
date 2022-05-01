@@ -1,10 +1,11 @@
 class Solution {
 public:
     int minimumSum(int num) {
-        vector<int> v;
+        vector<int> v(4);
+        int c=0;
         while(num!=0)
         {
-            v.push_back(num%10);
+            v[c++]=(num%10);
             num/=10;
         }
         sort(v.begin(),v.end());
