@@ -14,11 +14,6 @@ public:
             
         }
         return mx;
-        // int ans=0;
-        // for(int i=1;i<n-1;i++)
-        // {
-        //     ans+=(min(left[i],right[i]));
-        // }
-        // return ans;
+        
     }
 };
