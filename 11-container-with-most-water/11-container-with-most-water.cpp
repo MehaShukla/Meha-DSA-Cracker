@@ -17,7 +17,7 @@ public:
         int i=0,j=n-1,mx=INT_MIN;
         while(i<j)                          //two pointers concept
         {
-            int area=min(left[i],right[j])*(j-i);
+            int area=min(left[i],right[j])*(j-i);// area chye so beadth nikalre
             mx=max(mx,area);
             if(left[i]>right[j])
                 j--;
