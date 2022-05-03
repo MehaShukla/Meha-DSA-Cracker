@@ -1,8 +1,11 @@
 class Solution {
 public:
     int minPartitions(string n) {
-        sort(n.begin(),n.end());
-        int y=n[n.length()-1]-'0';
-        return y;
+      int result = 0;
+    for (int c : n) {
+      result = std::max(result, c);
+        //if (!(9-result)) return 9;
+    }
+    return result-'0';
     }
 };
