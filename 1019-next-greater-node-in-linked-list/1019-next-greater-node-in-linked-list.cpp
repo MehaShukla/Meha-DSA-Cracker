@@ -10,39 +10,21 @@
  */
 class Solution {
 public:
-    ListNode * reverse(ListNode* head) {
-          if(head==NULL) return NULL;
-        ListNode* temp=head, *prev=NULL, *dummy;
-        while(temp) {
-            dummy= temp->next;
-            temp->next= prev;
-            prev= temp;
-            temp=dummy;
-        }
-        return prev;
-    }
     
     vector<int> nextLargerNodes(ListNode* head) {
-        vector<int>ans;
-        stack<int>stk;
-        
-        head= reverse(head);
-        ListNode* temp=head;
-        
-        while(temp) {
-            if(!stk.empty() && stk.top()<=temp->val) {
-                while(!stk.empty() && stk.top()<=temp->val)
-                    stk.pop();
+        vector<int> ans;
+        stack<pair<int,int>> s;
+        int i=0;
+        while(head){
+            while(!s.empty() && s.top().first<head->val){
+                int idx=s.top().second;
+                s.pop();
+                ans[idx]=head->val;
             }
-            if(stk.empty())
-                ans.push_back(0);
-            else if(!stk.empty() && temp->val<stk.top())
-                ans.push_back(stk.top());
-            
-            stk.push(temp->val);
-            temp=temp->next;
+            s.push({head->val,i++});
+            head=head->next;
+            ans.push_back(0);
         }
-        ::reverse(ans.begin(), ans.end());
         return ans;
         
     }
