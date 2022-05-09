@@ -11,48 +11,23 @@
  */
 class Solution {
 public:
-    // vector<int> pre;
-    TreeNode* headnew = NULL;
-    TreeNode* tailnew = NULL;
-    // void help(TreeNode* root)
-    // {
-    //     if(root==NULL)
-    //     {
-    //         return;
-    //     }
-    //     pre.push_back(root->val);
-    //     help(root->left);
-    //     help(root->right);
-    // }
-    void helper(TreeNode* root)
-    {
-        if(root==NULL)
-        {
-            return;
+   void flatten(TreeNode* root) {
+        if(root==NULL || (root->left==NULL && root->right==NULL)) return;
+        
+        if(root->left != NULL){
+            flatten(root->left); 
+			//store right subtree in temp variable and attach left subtree in place of right subtree
+            TreeNode* temp = root->right; 
+            root->right = root->left;
+            root->left = NULL;
+			
+            TreeNode* tail = root->right;
+            while(tail->right != NULL){
+                tail = tail->right;
+            }
+            
+            tail->right = temp; //attaching temp(old root->right) to the tail of root->right(old root->left)
         }
-        TreeNode* n = new TreeNode(root->val);
-        n->left = NULL;
-        n->right = NULL;
-        if(headnew==NULL)//1 hi elemnt h abhi tk mtlb to dono ko vhi point kro
-        {
-            headnew=n;
-            tailnew = n;
-        }
-        else
-        {
-            tailnew->right = n;
-            tailnew = n;
-        }
-        helper(root->left);
-        helper(root->right);
-    }
-    void flatten(TreeNode* root) {
-        if(root==NULL)
-        {
-            return;
-        }
-        // help(root);
-        helper(root);
-        *root = *headnew;
-    }
+        flatten(root->right);
+   }
 };
