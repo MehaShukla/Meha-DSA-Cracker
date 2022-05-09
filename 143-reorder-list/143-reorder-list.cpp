@@ -10,72 +10,39 @@
  */
 class Solution {
 public:
-    ListNode* h = NULL;
-    ListNode* temp = NULL;
-    void help(ListNode* root)
-    {
-        stack<int> s1,s2;
-        ListNode* temp = root;
-        int size = 0;
-        while(temp!=NULL)
-        {
-            s1.push(temp->val);
-            size++;
-            temp = temp->next;
-        }
-        while(!s1.empty())
-        {
-            s2.push(s1.top());
-            s1.pop();
-        }
-        temp = root;
-        while(temp!=NULL)
-        {
-            s1.push(temp->val);
-            temp = temp->next;
-        }
-         for(int i = 0;i<size/2;i++)
-            {
-                ListNode* n1 = new ListNode(s2.top());
-                ListNode* n2 = new ListNode(s1.top());
-                s1.pop();
-                s2.pop();
-                if(h==NULL)
-                {
-                    h = n1;
-                    temp = n1;
-                    temp->next = n2;
-                    temp = n2;
-                }
-                else
-                {
-                    temp->next = n1;
-                    temp = n1;
-                    temp->next = n2;
-                    temp = n2;
-                }
-            }
-        if(size%2!=0)
-        {
-           ListNode* n = new ListNode(s1.top());
-            if(size==1)
-            {
-                h = n;
-                temp = n;
-            }
-            else
-            {
-                temp->next = n;
-                temp = n;
-            }
-        }
-    }
     void reorderList(ListNode* head) {
-        if(head==NULL)
-        {
-            return;
-        }
-        help(head);
-        *head = *h;
+		auto mid = head;
+		for (auto fast = head; fast; ) {
+			fast = fast->next;
+			mid = mid->next;
+			if (fast) fast = fast->next;
+		}
+
+		mid = reverseList(mid);
+		auto node1 = head;
+		for (auto node2 = mid; node2; ) {
+			auto next1 = node1->next;
+			auto next2 = node2->next;
+			node1->next = node2;
+			node2->next = next1;
+			node1 = next1;
+			node2 = next2;
+		}
+		if (node1) {
+			node1->next = nullptr;
+		}
+	}
+private:
+	ListNode* reverseList(ListNode* head) {
+		if (head == nullptr) return head;
+		auto pre = head;
+		for (auto cur = pre->next; cur; ) {
+			auto next = cur->next;
+			cur->next = pre;
+			pre = cur;
+			cur = next;
+		}
+		head->next = nullptr;
+		return pre;       
     }
 };
