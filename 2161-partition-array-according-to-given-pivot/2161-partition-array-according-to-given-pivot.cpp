@@ -1,31 +1,54 @@
+static const auto f = []() {
+    std::ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+
+    return 0;
+}();
+
 class Solution {
 public:
-   vector<int> pivotArray(vector<int>& nums, int pivot) {
+    vector<int> pivotArray(vector<int>& nums, int pivot) {
         
-        vector<int> less;
-        vector<int> greater;
-        vector<int> equal;
+        int low = 0;
+        int same = 0;
+        int high;
         
-            for(int i=0;i<nums.size();i++)
+        for (auto n : nums)
+        {
+            if (n < pivot)
             {
-            
-                    if(nums[i]<pivot){
-                        less.push_back(nums[i]);
-                    }
-
-                    else if(nums[i]>pivot){
-                        greater.push_back(nums[i]);
-                    }
-
-                    else if(nums[i]==pivot){
-                        equal.push_back(nums[i]);
-                    }
-            
+                ++low;
+            }
+            else if (n == pivot)
+            {
+                ++same;
+            }
         }
         
-        less.insert(less.end(),equal.begin(),equal.end());
-        less.insert(less.end(),greater.begin(),greater.end());
+        vector<int> res(nums.size());
         
-        return less;
+        high = same + low;
+        same = low;
+        low = 0;
+        
+        for (auto n : nums)
+        {
+            if (n < pivot)
+            {
+                res[low++] = n;
+            }
+            else if (n == pivot)
+            {
+                res[same++] = n;
+            }
+            else
+            {
+                res[high++] = n;
+            }
+        }
+        
+        return res;
+        
     }
 };
