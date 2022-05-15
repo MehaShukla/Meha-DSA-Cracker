@@ -10,41 +10,24 @@
  */
 class Solution {
 public:
-       ListNode* p1 = NULL;
-    ListNode* p2 = NULL;
-    void firstElement(ListNode* head,int k)
-    {
-        ListNode* temp = head;
-        k--;
-        while(k--)
-        {
-            temp = temp->next;
-        }
-        p1 = temp;
-    }
-    void secondElement(ListNode* head,int k)
-    {
-        ListNode* fast = head;
-        ListNode* slow = head;
-        while(k--)
-        {
-            fast = fast->next;
-        }
-        while(fast!=NULL)
-        {
-            fast = fast->next;
-            slow = slow->next;
-        }
-        p2 = slow;
-    }
+       ListNode *temp = NULL;
+        ListNode *klast=NULL;
+        ListNode * kfront=NULL;
     ListNode* swapNodes(ListNode* head, int k) {
-        if(head==NULL)
+       kfront=klast=temp=head;
+        int i=1;
+        while(i<k)
         {
-            return head;
+            temp=temp->next;
+            kfront=kfront->next;
+            i++;
         }
-        firstElement(head,k);
-        secondElement(head,k);
-        swap(p1->val,p2->val);
+        while(temp->next!=NULL)
+        {
+           klast=klast->next;
+            temp=temp->next;
+        }
+       swap(kfront->val,klast->val);
         return head;
     }
 };
