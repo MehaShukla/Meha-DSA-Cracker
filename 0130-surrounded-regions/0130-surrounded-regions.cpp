@@ -19,10 +19,11 @@ public:
             }
         }
         
-        int delrow[] = {-1, 0, +1, 0};
-        int delcol[] = {0, +1, +0, -1}; 
+ 
         
         while(!q.empty()) {
+                   int delrow[] = {-1, 0, +1, 0};
+        int delcol[] = {0, +1, +0, -1}; 
             int row = q.front().first; 
             int col = q.front().second; 
             q.pop(); 
