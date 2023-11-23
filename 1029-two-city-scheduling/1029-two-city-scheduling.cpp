@@ -1,4 +1,5 @@
 class Solution {
+    //sort the array by the differece cost[i][0]-cost[i][1]
 public:
     int twoCitySchedCost(vector<vector<int>>& costs) 
     {
