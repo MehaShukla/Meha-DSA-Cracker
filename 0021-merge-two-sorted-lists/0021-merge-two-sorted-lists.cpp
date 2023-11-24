@@ -23,7 +23,7 @@ public:
            temp = list1;
             temp-> next =mergeTwoLists(list1->next, list2);
         }
-        else 
+        else  // no else if here else output 0
         {
              temp = list2;
            temp->next= mergeTwoLists(list1, list2->next);
