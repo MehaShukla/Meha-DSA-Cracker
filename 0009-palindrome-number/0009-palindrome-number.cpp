@@ -1,13 +1,13 @@
 class Solution {
     public:
         int reverseNum(int x){
-	        long long X = 0;
+	        long long rev = 0;
 	        while(x){
 		        int temp = x % 10;
-		        X = X * 10 + temp;
+		        rev = rev * 10 + temp;
 		        x /= 10;
 	        }
-	        return X;
+	        return rev;
         }
         bool isPalindrome(int x) {
             if(x < 0) return false;
