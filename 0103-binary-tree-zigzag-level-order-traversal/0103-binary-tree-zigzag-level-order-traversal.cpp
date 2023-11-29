@@ -16,7 +16,8 @@ public:
         if (!root) {
             return result;
         }
-        deque<TreeNode*> q {root};
+        deque<TreeNode*> q ;
+        q.push_front(root);
         int level = 0;
         while (q.size()) {
             vector<int> temp(q.size(), 0);
