@@ -9,7 +9,6 @@ public:
             for(int j=0;j<n;j++){
                 if(!vis[i][j] && grid[i][j] == '1'){
                     ans++;
-                    cout<<i<<" "<<j<<endl;
                     bfs(i,j,vis,grid);
                 }
             }
